@@ -203,7 +203,9 @@ export function IntroSequence({ children }: { children: React.ReactNode }) {
         data-preloader
         className="fixed inset-0 z-50 flex items-center justify-center bg-void"
       >
-        <canvas ref={canvasRef} aria-hidden className="absolute inset-0" />
+        {/* w-full h-full обязателен: без CSS-размера canvas с dpr>1 рендерится
+            в интринсик-размере и уезжает вправо (replaced element + inset-0) */}
+        <canvas ref={canvasRef} aria-hidden className="absolute inset-0 h-full w-full" />
 
         <div
           data-preloader-label
@@ -237,9 +239,10 @@ export function IntroSequence({ children }: { children: React.ReactNode }) {
           ARACHNIA
         </span>
 
+        {/* на узких экранах счётчик строкой выше, чтобы не наезжать на угловые метки */}
         <div
           data-preloader-label
-          className="absolute bottom-5 left-1/2 z-10 -translate-x-1/2 md:bottom-8"
+          className="absolute bottom-14 left-1/2 z-10 -translate-x-1/2 md:bottom-8"
         >
           <MonoLabel className="text-muted">
             WEAVING — <span data-counter className="text-bone">000</span>
